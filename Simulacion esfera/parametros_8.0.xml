@@ -1,0 +1,91 @@
+<?xml version="1.0" ?>
+
+<!--
+    Parameters set by the user.
+    All user input variables and all data in external input files must be in the same system of units.
+ -->
+
+<geometry>
+    <!-- Coordinates of the physical simulation domain. -->
+    <simulationDomain>
+        <x> 0.0 10.0 </x>
+        <y> 0.0 10.0 </y>
+        <z> 0.0 4.0 </z>
+    </simulationDomain>
+    <!-- Files with the moving immersed surface geometries. -->
+    <movingSurfaceFileNames> sphere.stl </movingSurfaceFileNames>
+</geometry>
+
+<numerics>
+    
+    <masa> 1.0  </masa>
+    <!-- Immersed surfaces are represented as triangle surface meshes.
+         Because of the immersed boundary method used, the size of
+         the triangles must approximately be the same as the lattice cell size.
+         The value of this parameter provides the option to refine the
+         triangular representation of the immersed surfaces. -->
+    <refineSurfaceMeshes> true </refineSurfaceMeshes>
+    <!-- If surface mesh refinement has been selected, the next parameter
+         defines the target value of the maximum edge length of the new
+         refined surface mesh. If the value is negative, then the target
+         length is considered to be equal to dx. -->
+    <targetMaxEdgeLength> -1.0 </targetMaxEdgeLength>
+    <!-- This is the maximum number of surface refinements to be performed,
+         whether or not the target maximum triangle edge length has been
+         achieved. -->
+    <maxNumSurfaceRefinements> 100 </maxNumSurfaceRefinements>
+    <!-- Characteristic length to define the resolution and the Reynolds number. -->
+    <characteristicLength> 75 </characteristicLength>
+    <!-- Total number of lattice nodes in the characteristic length. -->
+    <resolution> 1000.0 </resolution>
+    <!-- Discrete time step. -->
+    <dt> 1.0e-2 </dt>
+    <!-- Maximum number of iterations. -->
+    <maxIter> 8000 </maxIter>
+    <!-- Iterations for the immersed boundary method. -->
+    <ibIter> 4 </ibIter>
+    <!-- Smagorinsky LES model parameter. -->
+    <cSmago> 0.2 </cSmago>
+    <!-- Inlet velocity. -->
+    <inletVelocity> 1.6e-5 0.0 0.0 </inletVelocity>
+    <U_inicial> 0.0 0.0 0.0 </U_inicial>
+    <W_inicial> 0.0 0.0 0.0 </W_inicial>
+    <!-- Use periodic lateral boundaries or free-slip ones? -->
+    <lateralPeriodic> true </lateralPeriodic>
+    <abortFileName> abort </abortFileName>
+    <!-- XML file name for restarting. -->
+    <xmlContinueFileName> continue.xml </xmlContinueFileName>
+    <!-- Base file name for checkpoint files. -->
+    <baseFileName> checkpoint_ </baseFileName>
+    <!-- For a desktop PC this should be "false", for a cluster "true". -->
+    <useParallelIO> true </useParallelIO>  
+</numerics>
+
+<fluid>
+    <!-- Fluid density. -->
+    <rho> 0.008 </rho>
+    <!-- Fluid kinematic viscosity. -->
+    <nu> 0.002 </nu>
+    <!-- Absolute pressure at infinity. -->
+    <ambientPressure> 0.0 </ambientPressure>
+
+</fluid>
+
+<output>
+    <!-- Number of iterations for terminal output. -->
+    <statIter> 100 </statIter>
+    <!-- Number of iterations for disk output. -->
+    <outIter> 200 </outIter>
+    <!-- Number of iterations for checkpointing. Zero or negative means no checkpoints. -->
+    <cpIter> -1 </cpIter>
+    <!-- Number of iterations for checking for user-driven program abortion. -->
+    <abIter> 16 </abIter>
+    <!-- Save data on disk in a volume subdomain of the whole simulation domain or not? -->
+    <outputInDomain> true </outputInDomain>
+    <!-- Domain for disk output (must be a subset of the simulation domain). -->
+    <outputDomain>
+        <x> 0.0 10.0 </x>
+        <y> 0.0 10.0 </y>
+        <z> 0.0 4.0  </z>
+    </outputDomain>
+</output>
